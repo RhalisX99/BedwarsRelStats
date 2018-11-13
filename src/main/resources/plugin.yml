@@ -1,0 +1,10 @@
+name: BedwarsRelStats
+version: 2.1
+main: it.rhalis.bedwarsrelstats.BedwarsRelStats
+authors: [RhalisX99]
+description: BedwarsRel stats from everywhere | PlaceholderAPI expansion integrated
+softdepend: [BedwarsRel, PlaceholderAPI]
+commands:
+  bedwarsrelstats:
+    description: Main command
+    aliases: [bwrstats, bws, bwrs]

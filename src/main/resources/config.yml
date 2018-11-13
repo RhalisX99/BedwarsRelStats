@@ -1,0 +1,49 @@
+#MySQL settings (enable only if you use BedwarsRel with MySQL)
+#WARNING: These settings are not affected by /bws reload
+MySQL:
+  enabled: false
+  connection:
+    ip: localhost
+    port: 3306
+    database: Bedwars
+    user: root
+    password: password
+    #Don't touch this unless you know what it does!
+    table-prefix: bw_
+
+#Command settings
+Command:
+  custom-command: bwstats
+  output:
+    - '&6&m------[&e {name} &6&m]------'
+    - '&7Wins: &f{wins}'
+    - '&7Loses: &f{loses}'
+    - '&7Matches played: &f{total}'
+    - '&7Kills: &f{kills}'
+    - '&7Deaths: &f{deaths}'
+    - '&7Beds destroyed: &f{destroyed}'
+    - '&7Total score: &f{score}'
+    - ''
+    - '&8[&7K/D Ratio &f{kd}&8] &8[&7W/L Ratio &f{wl}&8]'
+
+## Command placeholders ##
+# {name} = player name
+# {displayname} = player display name
+# {wins} = total won matches
+# {loses} = total lost matches
+# {total} = total matches played
+# {kills} = total kills
+# {deaths} = total deaths
+# {destroyed} = total destroyed beds
+# {score} = player score
+# {kd} = player kill/death ratio
+# {wl} = player win/lose ratio
+
+#Messages configuration
+Messages:
+  main-command:
+    no-permission: '&cYou don''t have permission to use this command.'
+    reload-successful: '&cConfiguration reloaded successfully.'
+    correct-usage: '&cCorrect usage: &7/bws reload'
+  custom-command:
+    not-set-correctly: '&cThis command has not been set correctly. Contact a staff member.'
