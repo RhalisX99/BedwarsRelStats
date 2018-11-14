@@ -5,7 +5,6 @@ import it.rhalis.bedwarsrelstats.BedwarsRelStats;
 import it.rhalis.bedwarsrelstats.sql.SQLManager;
 import java.text.DecimalFormat;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
 
 import org.bukkit.entity.Player;
 
@@ -47,7 +46,7 @@ public class PAPIHook extends PlaceholderExpansion {
 
         SQLManager sql = BedwarsRelStats.getInstance().getSQLManager();
         boolean isUsingMySQL = sql != null;
-        
+
         boolean isBedwarsRel = plugin.getServer().getPluginManager().isPluginEnabled("BedwarsRel");
 
         if (identifier.equalsIgnoreCase("player_name")) {
@@ -55,237 +54,126 @@ public class PAPIHook extends PlaceholderExpansion {
         }
 
         if (identifier.equalsIgnoreCase("player_wins")) {
+            String wins;
 
-            int wins;
-
-            if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    wins = sql.getPlayerStats(p).getWins();
-                    return String.valueOf(wins);
-
-                }
+            if(isUsingMySQL){
+                wins = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getWins()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    wins = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins();
-                    return String.valueOf(wins);
-
-                }
+                wins = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins()) : null;
             }
+            return wins;
         }
 
         if (identifier.equalsIgnoreCase("player_loses")) {
+            String loses;
 
-            int loses;
-
-            if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    loses = sql.getPlayerStats(p).getLoses();
-                    return String.valueOf(loses);
-
-                }
+            if(isUsingMySQL){
+                loses = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getLoses()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    loses = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses();
-                    return String.valueOf(loses);
-                }
+                loses = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses()) : null;
             }
+            return loses;
         }
 
         if (identifier.equalsIgnoreCase("player_total")) {
-
-            int total;
-
-            int wins;
-            int loses;
+            String total;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    wins = sql.getPlayerStats(p).getKills();
-                    loses = sql.getPlayerStats(p).getDeaths();
-
-                    total = wins + loses;
-
-                    return String.valueOf(total);
-
-                }
+                total = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getWins() + sql.getPlayerStats(p).getLoses()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    wins = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins();
-                    loses = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses();
-
-                    total = wins + loses;
-
-                    return String.valueOf(total);
-                }
+                total = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins()
+                                                    + BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses()) : null;
             }
+            return total;
         }
 
         if (identifier.equalsIgnoreCase("player_kills")) {
-
-            int kills;
+            String kills;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    kills = sql.getPlayerStats(p).getKills();
-                    return String.valueOf(kills);
-
-                }
+                kills = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getKills()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    kills = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getKills();
-                    return String.valueOf(kills);
-                }
+                kills = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getKills()) : null;
             }
+            return kills;
         }
 
         if (identifier.equalsIgnoreCase("player_deaths")) {
-
-            int deaths;
+            String deaths;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    deaths = sql.getPlayerStats(p).getDeaths();
-                    return String.valueOf(deaths);
-
-                }
+                deaths = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getDeaths()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    deaths = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDeaths();
-                    return String.valueOf(deaths);
-                }
+                deaths = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDeaths()) : null;
             }
+            return deaths;
         }
 
         if (identifier.equalsIgnoreCase("player_destroyedbeds")) {
-
-            int destroyed;
+            String destroyed;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    destroyed = sql.getPlayerStats(p).getDestroyedBeds();
-                    return String.valueOf(destroyed);
-
-                }
+                destroyed = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getDestroyedBeds()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    destroyed = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDestroyedBeds();
-                    return String.valueOf(destroyed);
-                }
+                destroyed = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDestroyedBeds()) : null;
             }
+            return destroyed;
         }
 
         if (identifier.equalsIgnoreCase("player_score")) {
-
-            int score;
+            String score;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    score = sql.getPlayerStats(p).getScore();
-                    return String.valueOf(score);
-
-                }
+                score = sql.isConnected() ? String.valueOf(sql.getPlayerStats(p).getScore()) : null;
             } else {
-                if (isBedwarsRel) {
-
-                    score = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getScore();
-                    return String.valueOf(score);
-                }
+                score = isBedwarsRel ? String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getScore()) : null;
             }
+            return score;
         }
 
         if (identifier.equalsIgnoreCase("player_kd")) {
 
             DecimalFormat format = new DecimalFormat("0.00");
-            double kd;
-
-            int kills;
-            int deaths;
+            String kd;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    kills = sql.getPlayerStats(p).getKills();
-                    deaths = sql.getPlayerStats(p).getDeaths();
-
-                    try {
-                        kd = (double)kills / deaths;
-                    } catch (ArithmeticException e) {
-                        kd = kills;
-                    }
-
-                    return format.format(kd);
-
+                try{
+                    kd = sql.isConnected() ? format.format((double) (sql.getPlayerStats(p).getKills()/sql.getPlayerStats(p).getDeaths())) : null;
+                } catch (ArithmeticException e){
+                    kd = String.valueOf(sql.getPlayerStats(p).getKills());
                 }
             } else {
-                if (isBedwarsRel) {
-
-                    kills = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getKills();
-                    deaths = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDeaths();
-
-                    try {
-                        kd = (double)kills / deaths;
-                    } catch (ArithmeticException e) {
-                        kd = kills;
-                    }
-
-                    return format.format(kd);
+                try{
+                    kd = isBedwarsRel ? format.format((double) BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getKills()
+                            / BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getDeaths()) : null;
+                } catch(ArithmeticException e){
+                    kd = String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getKills());
                 }
             }
+            return kd;
         }
 
         if (identifier.equalsIgnoreCase("player_wl")) {
 
             DecimalFormat format = new DecimalFormat("0.00");
-            double wl;
-
-            int wins;
-            int loses;
+            String wl;
 
             if (isUsingMySQL) {
-                if (sql.isConnected()) {
-
-                    wins = sql.getPlayerStats(p).getKills();
-                    loses = sql.getPlayerStats(p).getDeaths();
-
-                    try {
-                        wl = (double)wins / loses;
-                    } catch (ArithmeticException e) {
-                        wl = wins;
-                    }
-
-                    return format.format(wl);
-
+                try{
+                    wl = sql.isConnected() ? format.format((double) (sql.getPlayerStats(p).getWins()/sql.getPlayerStats(p).getLoses())) : null;
+                } catch (ArithmeticException e){
+                    wl = String.valueOf(sql.getPlayerStats(p).getWins());
                 }
             } else {
-                if (isBedwarsRel) {
-
-                    wins = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins();
-                    loses = BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses();
-
-                    try {
-                        wl = (double)wins / loses;
-                    } catch (ArithmeticException e) {
-                        wl = wins;
-                    }
-
-                    return format.format(wl);
+                try{
+                    wl = isBedwarsRel ? format.format((double) BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins()
+                            / BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getLoses()) : null;
+                } catch(ArithmeticException e){
+                    wl = String.valueOf(BedwarsRel.getInstance().getPlayerStatisticManager().getStatistic(p).getWins());
                 }
             }
+            return wl;
         }
-
         return null;
     }
 }
